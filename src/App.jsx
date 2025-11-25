@@ -6,6 +6,16 @@ const PlayerPortfolio = () => {
   const [activeSection, setActiveSection] = useState('hero'); // Не используется в текущей логике
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // --- НОВЫЙ МАССИВ ДЛЯ НАВИГАЦИИ (включает иконки) ---
+  const navItems = [
+    { label: 'О себе', id: 'hero', Icon: User },
+    { label: 'Статистика', id: 'stats', Icon: TrendingUp },
+    { label: 'Матчи', id: 'matches', Icon: Target },
+    { label: 'Достижения', id: 'achievements', Icon: Award },
+    { label: 'Контакты', id: 'contact', Icon: Download },
+  ];
+  // ----------------------------------------------------
+
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -17,13 +27,9 @@ const PlayerPortfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Дополнительный useEffect для предотвращения скролла, когда открыто мобильное меню
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
+  // --- ИСПРАВЛЕНО: УДАЛЕН useEffect, который блокировал скролл на body ---
+  // Проблема была в том, что этот useEffect блокировал прокрутку всей страницы,
+  // из-за чего казалось, что контент внизу "не виден".
 
   const stats = [
     { label: 'Матчей', value: '14' },
@@ -41,7 +47,16 @@ const PlayerPortfolio = () => {
   ];
 
   const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    // Добавлен небольшой отступ, чтобы секция не пряталась под фиксированным хедером
+    const element = document.getElementById(id);
+    if (element) {
+        const headerHeight = 60; // Примерная высота вашего хедера (60px)
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: elementPosition - headerHeight - 10, // Скролл чуть выше секции
+            behavior: 'smooth'
+        });
+    }
     setIsMenuOpen(false);
   };
 
@@ -64,7 +79,6 @@ const PlayerPortfolio = () => {
       </div>
 
       {/* Navigation */}
-      {/* Увеличенная высота навигации, чтобы не сливалась с прогресс-баром на мобильных устройствах */}
       <nav className="fixed top-0 left-0 right-0 bg-black/98 backdrop-blur-xl z-40 border-b border-emerald-500/20 pt-1">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
@@ -74,19 +88,19 @@ const PlayerPortfolio = () => {
               </div>
               <div>
                 <h1 className="font-bold text-base sm:text-lg tracking-tight">Ербол Аманкелди</h1>
-                {/* Уменьшен размер шрифта на мобильных устройствах */}
                 <p className="text-xs sm:text-sm text-emerald-400 uppercase tracking-wider font-semibold">Центральный полузащитник</p>
               </div>
             </div>
 
+            {/* Десктопное меню */}
             <div className="hidden md:flex space-x-6 lg:space-x-8">
-              {['О себе', 'Статистика', 'Матчи', 'Достижения', 'Контакты'].map((item, idx) => (
+              {navItems.map((item) => (
                 <button
-                  key={idx}
-                  onClick={() => scrollToSection(['hero', 'stats', 'matches', 'achievements', 'contact'][idx])}
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
                   className="hover:text-emerald-400 transition-colors font-medium uppercase text-xs lg:text-sm tracking-wider"
                 >
-                  {item}
+                  {item.label}
                 </button>
               ))}
             </div>
@@ -101,16 +115,21 @@ const PlayerPortfolio = () => {
           </div>
         </div>
 
-        {/* Мобильное меню - добавлена fixed для перекрытия всего контента */}
+        {/* Мобильное меню - Исправлено: иконки добавлены, стили для скролла проверены */}
         {isMenuOpen && (
-          <div className="md:hidden fixed inset-0 top-[60px] bg-zinc-950/98 backdrop-blur-md z-50 overflow-y-auto pt-4 pb-20 transition-transform duration-300">
-            {['О себе', 'Статистика', 'Матчи', 'Достижения', 'Контакты'].map((item, idx) => (
+          <div 
+            // Использование фиксированной высоты h-[calc(100vh-60px)] для гарантированной прокрутки
+            className="md:hidden fixed left-0 right-0 bg-zinc-950/98 backdrop-blur-md z-50 overflow-y-auto pt-4 pb-20 transition-transform duration-300"
+            style={{ top: '60px', height: 'calc(100vh - 60px)' }}
+          >
+            {navItems.map((item) => (
               <button
-                key={idx}
-                onClick={() => scrollToSection(['hero', 'stats', 'matches', 'achievements', 'contact'][idx])}
-                className="block w-full text-left px-6 py-4 text-xl hover:bg-emerald-500/10 transition-colors uppercase tracking-wider font-semibold border-b border-zinc-800"
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="flex items-center space-x-4 w-full text-left px-6 py-4 text-xl hover:bg-emerald-500/10 transition-colors uppercase tracking-wider font-semibold border-b border-zinc-800"
               >
-                {item}
+                <item.Icon size={24} className="text-emerald-400 flex-shrink-0" />
+                <span>{item.label}</span>
               </button>
             ))}
           </div>
@@ -121,9 +140,8 @@ const PlayerPortfolio = () => {
       <section id="hero" className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/20 via-transparent to-transparent" />
         <div className="container mx-auto relative z-10">
-          {/* Сетка для мобильных: изображение сверху, текст снизу, затем переход к md:grid-cols-2 */}
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            
+
             {/* Изображение - первый элемент на мобильных устройствах */}
             <div className="relative order-2 md:order-1 max-w-sm mx-auto md:max-w-none">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/30 to-green-500/30 rounded-3xl blur-3xl animate-pulse" />
@@ -133,7 +151,6 @@ const PlayerPortfolio = () => {
                   alt="Ербол Аманкелди"
                   className="relative rounded-3xl shadow-2xl w-full max-w-sm mx-auto border-4 border-emerald-500/30"
                 />
-                {/* Уменьшение размера для мобильных */}
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 sm:-bottom-8 sm:-right-8 sm:w-32 sm:h-32 bg-gradient-to-br from-emerald-500 to-green-600 rounded-3xl flex items-center justify-center font-black text-4xl sm:text-5xl shadow-2xl shadow-emerald-500/50 border-4 border-black">
                   97
                 </div>
@@ -366,14 +383,13 @@ const PlayerPortfolio = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-green-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative bg-zinc-900 p-4 sm:p-6 rounded-2xl border-2 border-emerald-500/30 hover:border-emerald-500/60 transition-all">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
-                    
+
                     {/* Информация о матче */}
                     <div className="flex items-center space-x-3 sm:space-x-4 w-full sm:w-auto">
                       <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex-shrink-0 flex items-center justify-center font-black text-lg sm:text-xl shadow-lg shadow-emerald-500/30">
                         {match.round}
                       </div>
                       <div className='min-w-0'>
-                        {/* Уменьшение шрифта для мобильных */}
                         <div className="font-bold text-base sm:text-lg tracking-tight truncate">
                           {match.home ? 'Астана U18' : match.opponent} - {match.home ? match.opponent : 'Астана U18'}
                         </div>
@@ -525,7 +541,6 @@ const PlayerPortfolio = () => {
             </div>
           </div>
           <p className="font-semibold text-zinc-400 text-sm sm:text-base mb-1 sm:mb-2">© 2025 Ербол Аманкелди</p>
-          {/* Уменьшение шрифта для "ФК Астана U18 • QJ League" */}
           <p className="text-xs uppercase tracking-wider text-emerald-400/70">ФК Астана U18 • QJ League</p>
         </div>
       </footer>
