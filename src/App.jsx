@@ -121,7 +121,7 @@ const PlayerPortfolio = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/30 to-green-500/30 rounded-3xl blur-3xl animate-pulse" />
               <div className="relative">
                 <img
-                  src="/src/assets/photo.webp"
+                  src="/photo.webp"
                   alt="Yerbol Amankeldi"
                   className="relative rounded-3xl shadow-2xl w-full max-w-sm mx-auto border-4 border-emerald-500/30"
                 />
