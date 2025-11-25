@@ -121,7 +121,7 @@ const PlayerPortfolio = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/30 to-green-500/30 rounded-3xl blur-3xl animate-pulse" />
               <div className="relative">
                 <img
-                  src="https://api.qjl.kz/storage/profile-images/0bc7850a-0b56-4f40-935f-1df1e8612300.webp"
+                  src="/src/assets/photo.webp"
                   alt="Yerbol Amankeldi"
                   className="relative rounded-3xl shadow-2xl w-full max-w-sm mx-auto border-4 border-emerald-500/30"
                 />
@@ -217,7 +217,7 @@ const PlayerPortfolio = () => {
               <div className="relative bg-zinc-900 p-6 sm:p-8 rounded-2xl border-2 border-emerald-500/30 hover:border-emerald-500/60 transition-all">
                 <Trophy className="w-10 h-10 sm:w-14 sm:h-14 text-emerald-400 mb-4 sm:mb-6" strokeWidth={2.5} />
                 <h3 className="text-xl sm:text-2xl font-black mb-2 sm:mb-3 tracking-tight">International Experience</h3>
-                <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">Currently on loan at Viktoria Köln, Germany</p>
+                <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">Experience at Viktoria Köln, Germany</p>
               </div>
             </div>
 
