@@ -413,7 +413,7 @@ const PlayerPortfolio = () => {
 
             {/* Transfermarkt – отдельная кнопка */}
             <a
-              href="https://www.transfermarkt.world"
+              href="https://www.transfermarkt.world/erbol-amankeldy/profil/spieler/1399833"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full lg:w-auto px-10 py-5 bg-zinc-900 border border-zinc-700 text-white font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-800 hover:border-emerald-500/50 transition-all flex items-center justify-center gap-3"
