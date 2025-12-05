@@ -2,8 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { 
   Menu, X, Calendar, MapPin, User, Download, 
   Award, Trophy, Target, TrendingUp, ChevronRight, 
-  ExternalLink, Mail, MessageCircle
+  ExternalLink, Mail
 } from 'lucide-react';
+
+const WhatsAppIcon = ({ className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    className={className}
+    fill="currentColor"
+  >
+    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+  </svg>
+);
 
 const PlayerPortfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -352,53 +363,58 @@ const PlayerPortfolio = () => {
         
         <div className="container mx-auto max-w-4xl relative z-10 text-center">
           <div className="inline-block p-2 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
-             <span className="text-emerald-400 font-bold uppercase tracking-widest text-xs">Open for Opportunities</span>
+            <span className="text-emerald-400 font-bold uppercase tracking-widest text-xs">
+              Open for Opportunities
+            </span>
           </div>
-          
+
           <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-8">
             READY TO MAKE AN <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-lime-400">IMPACT</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-lime-400">
+              IMPACT
+            </span>
           </h2>
-          
+
           <p className="text-zinc-400 text-lg mb-12 max-w-2xl mx-auto">
-            Currently available for trials and transfer negotiations. 
-            Representative inquiries are welcome via email or direct message.
+            Currently available for trials and transfer negotiations.
+            Representative inquiries are welcome via WhatsApp or email.
           </p>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-            {/* Левые CTA: WhatsApp + Email */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-              <a 
+          {/* Блок с кнопками */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-6">
+            {/* Основные CTA: WhatsApp + Email */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+              <a
                 href="https://wa.me/77761206418"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-8 py-5 bg-emerald-500 text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-emerald-400 transition-all duration-300 shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-3"
+                className="w-full sm:w-auto px-8 py-5 bg-emerald-500 text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-emerald-400 transition-all duration-300 shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-3"
               >
-                <MessageCircle size={20} />
+                <WhatsAppIcon className="w-5 h-5" />
                 <span>WhatsApp</span>
-                <span className="hidden sm:inline text-xs font-semibold tracking-[0.2em] opacity-70">
+                <span className="hidden xl:inline text-xs font-semibold tracking-[0.25em] opacity-70">
                   +7 776 120 64 18
                 </span>
               </a>
 
-              <a 
+              <a
                 href="mailto:amankeldierbol1@gmail.com"
-                className="flex-1 px-8 py-5 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-zinc-100 transition-all duration-300 shadow-xl shadow-white/10 flex items-center justify-center gap-3"
+                className="w-full sm:w-auto px-8 py-5 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-zinc-100 transition-all duration-300 shadow-xl shadow-white/10 flex items-center justify-center gap-3"
               >
                 <Mail size={20} />
                 <span>Email</span>
-                <span className="hidden sm:inline text-[11px] font-semibold tracking-[0.18em] opacity-70">
+                <span className="hidden xl:inline text-[11px] font-semibold tracking-[0.22em] opacity-70">
                   amankeldierbol1@gmail.com
                 </span>
               </a>
             </div>
 
-            {/* Transfermarkt остаётся справа отдельной кнопкой */}
-            <a 
+            {/* Transfermarkt – отдельная кнопка */}
+            <a
               href="https://www.transfermarkt.world"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full md:w-auto px-10 py-5 bg-zinc-900 border border-zinc-700 text-white font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-800 hover:border-emerald-500/50 transition-all flex items-center justify-center gap-3"
+              className="w-full lg:w-auto px-10 py-5 bg-zinc-900 border border-zinc-700 text-white font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-800 hover:border-emerald-500/50 transition-all flex items-center justify-center gap-3"
             >
               Transfermarkt <ExternalLink size={18} />
             </a>
