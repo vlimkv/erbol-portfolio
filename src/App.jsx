@@ -392,9 +392,10 @@ const PlayerPortfolio = () => {
               >
                 <WhatsAppIcon className="w-5 h-5" />
                 <span>WhatsApp</span>
-                <span className="hidden xl:inline text-xs font-semibold tracking-[0.25em] opacity-70">
+                {/* <- вот этот span ПРОСТО УДАЛЯЕМ */}
+                {/* <span className="hidden xl:inline text-xs font-semibold tracking-[0.25em] opacity-70">
                   +7 776 120 64 18
-                </span>
+                </span> */}
               </a>
 
               <a
@@ -403,9 +404,10 @@ const PlayerPortfolio = () => {
               >
                 <Mail size={20} />
                 <span>Email</span>
-                <span className="hidden xl:inline text-[11px] font-semibold tracking-[0.22em] opacity-70">
+                {/* и этот тоже удаляем */}
+                {/* <span className="hidden xl:inline text-[11px] font-semibold tracking-[0.22em] opacity-70">
                   amankeldierbol1@gmail.com
-                </span>
+                </span> */}
               </a>
             </div>
 
