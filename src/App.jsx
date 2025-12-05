@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Menu, X, Calendar, MapPin, User, Download, 
   Award, Trophy, Target, TrendingUp, ChevronRight, 
-  ExternalLink, Mail 
+  ExternalLink, Mail, MessageCircle
 } from 'lucide-react';
 
 const PlayerPortfolio = () => {
@@ -365,19 +365,40 @@ const PlayerPortfolio = () => {
             Representative inquiries are welcome via email or direct message.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a 
-              href="mailto:contact@example.com"
-              className="w-full sm:w-auto px-10 py-5 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-emerald-400 transition-all duration-300 shadow-xl shadow-white/10"
-            >
-              Get in Touch
-            </a>
-            
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            {/* Левые CTA: WhatsApp + Email */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+              <a 
+                href="https://wa.me/77761206418"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 px-8 py-5 bg-emerald-500 text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-emerald-400 transition-all duration-300 shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-3"
+              >
+                <MessageCircle size={20} />
+                <span>WhatsApp</span>
+                <span className="hidden sm:inline text-xs font-semibold tracking-[0.2em] opacity-70">
+                  +7 776 120 64 18
+                </span>
+              </a>
+
+              <a 
+                href="mailto:amankeldierbol1@gmail.com"
+                className="flex-1 px-8 py-5 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:scale-105 hover:bg-zinc-100 transition-all duration-300 shadow-xl shadow-white/10 flex items-center justify-center gap-3"
+              >
+                <Mail size={20} />
+                <span>Email</span>
+                <span className="hidden sm:inline text-[11px] font-semibold tracking-[0.18em] opacity-70">
+                  amankeldierbol1@gmail.com
+                </span>
+              </a>
+            </div>
+
+            {/* Transfermarkt остаётся справа отдельной кнопкой */}
             <a 
               href="https://www.transfermarkt.world"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-10 py-5 bg-zinc-900 border border-zinc-700 text-white font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-800 hover:border-emerald-500/50 transition-all flex items-center justify-center gap-3"
+              className="w-full md:w-auto px-10 py-5 bg-zinc-900 border border-zinc-700 text-white font-bold uppercase tracking-widest rounded-xl hover:bg-zinc-800 hover:border-emerald-500/50 transition-all flex items-center justify-center gap-3"
             >
               Transfermarkt <ExternalLink size={18} />
             </a>
